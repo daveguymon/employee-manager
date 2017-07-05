@@ -15,7 +15,6 @@ class EmployeeEditor extends Component {
 
   // componentWillReceiveProps
     componentWillReceiveProps(props) {
-        console.log(props)
         this.setState({
             employee: Object.assign({}, props.selected),
             originalEmployee: props.selected,
@@ -35,14 +34,16 @@ class EmployeeEditor extends Component {
         
         this.setState({
             employee: employeeCopy
-        });
+        })
     }
 
   save() {
     this.state.originalEmployee.updateName(this.state.employee.name);
     this.state.originalEmployee.updatePhone(this.state.employee.phone);
     this.state.originalEmployee.updateTitle(this.state.employee.title);
-    this.setState({ notModified: true });
+    this.setState({ 
+        notModified: true 
+    });
     this.props.refreshList();
   }
 
