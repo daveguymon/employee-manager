@@ -8,11 +8,35 @@ class EmployeeEditor extends Component {
       originalEmployee: null,
       notModified: true
     };
+      
+      this.save = this.save.bind(this);
+      this.cancel = this.cancel.bind(this);
   }
 
   // componentWillReceiveProps
+    componentWillReceiveProps(props) {
+        console.log(props)
+        this.setState({
+            employee: Object.assign({}, props.selected),
+            originalEmployee: props.selected,
+            notModified: true
+        })
+    }
 
   // handleChange
+    handleChange(prop, val) {
+        if(this.state.notModified){
+            this.setState({
+                notModified: false
+            })
+        }
+        var employeeCopy = Object.assign({}, this.state.employee);
+        employeeCopy[prop] = val;
+        
+        this.setState({
+            employee: employeeCopy
+        });
+    }
 
   save() {
     this.state.originalEmployee.updateName(this.state.employee.name);
@@ -30,6 +54,7 @@ class EmployeeEditor extends Component {
   render() {
     return (
       <div className="infoCard">
+        
         { 
           this.state.employee
           ? 
